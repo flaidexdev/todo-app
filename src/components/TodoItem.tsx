@@ -40,13 +40,11 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
   };
 
   return (
-    <Card className={`rounded-md ${todo.done ? "" : ""}`}>
+    <Card className="rounded-md">
       <CardBody className="p-4">
-        <div className="grid gap-2 grid-cols-12 items-center">
+        <div className="grid gap-4 grid-cols-12 items-center">
           <div className="col-span-12 md:col-span-8">
-            <div
-              className={`  ${todo.done ? "line-through text-gray-400" : ""}`}
-            >
+            <div className={`${todo.done && "line-through text-gray-400"}`}>
               {todo.content}
             </div>
           </div>
@@ -55,7 +53,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
               <Chip
                 color={`${
                   todo.category === "Work"
-                    ? "green"
+                    ? "amber"
                     : todo.category === "Personal"
                     ? "teal"
                     : "purple"
@@ -67,18 +65,21 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
                 content={`${todo.done ? "Incomplete Todo" : "Complete Todo"}`}
               >
                 <ArrowPathRoundedSquareIcon
+                  data-testid="complete"
                   className="h-4 w-4 hover:text-green-500 cursor-pointer"
                   onClick={() => toggleDone(todo.id)}
                 />
               </Tooltip>
               <Tooltip content={"Copy Todo Content"}>
                 <ClipboardIcon
+                  data-testid="copy"
                   className="h-4 w-4 hover:text-green-500 cursor-pointer"
                   onClick={copyToClipboard}
                 />
               </Tooltip>
               <Tooltip content={"Remove Todo"}>
                 <TrashIcon
+                  data-testid="remove"
                   className="h-4 w-4 hover:text-red-500 cursor-pointer"
                   onClick={() => removeTodo(todo.id)}
                 />

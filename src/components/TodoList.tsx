@@ -45,8 +45,8 @@ const TodoList: React.FC = () => {
       </CardBody>
       <CardFooter className="pt-2 flex flex-wrap gap-2 items-center">
         <Chip value={`Total: ${filteredTodoData.length}`} />
-        <Chip 
-        color="green"
+        <Chip
+          color="green"
           value={`Completed: ${
             filteredTodoData.filter((todo) => todo.done).length
           }`}

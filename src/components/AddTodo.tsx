@@ -25,6 +25,10 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData }) => {
   const [category, setCategory] = useState("Work");
   const [open, setOpen] = useState(false);
 
+  function handlePopover(state: boolean) {
+    setOpen(state);
+  }
+
   const addTodo = () => {
     if (inputValue.trim()) {
       const newTodo: Todo = {
@@ -41,34 +45,37 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData }) => {
   };
 
   return (
-    <Popover
-      open={open}
-      handler={(state) => setOpen(state)}
-      placement="bottom-end"
-    >
+    <Popover open={open} handler={handlePopover} placement="bottom-end">
       <PopoverHandler>
-        <Button className="flex items-center justify-center gap-2">
+        <Button
+          data-testid="createNew"
+          size="sm"
+          className="flex items-center justify-center gap-2"
+        >
           <PlusIcon className="h-4 w-4" />
           Create New
         </Button>
       </PopoverHandler>
       <PopoverContent className="flex flex-col gap-3">
         <Select
+          data-testid="category"
           value={category}
           onChange={(value: any) => setCategory(value)}
           label="Select Category"
         >
           {categories.map((cat) => (
-            <Option key={cat} value={cat}>
+            <Option data-testid={cat} key={cat} value={cat}>
               {cat}
             </Option>
           ))}
         </Select>
         <Textarea
+          data-testid="content"
           onChange={(e) => setInputValue(e.target.value)}
           label="Content"
+          placeholder="Content of todo...."
         />
-        <Button size="sm" onClick={addTodo}>
+        <Button data-testid="addTodo" size="sm" onClick={addTodo}>
           Add Todo
         </Button>
       </PopoverContent>
