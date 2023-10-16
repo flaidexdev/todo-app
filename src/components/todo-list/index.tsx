@@ -17,7 +17,10 @@ import TodoItem from "../todo-item";
 import { Todo } from "../../types";
 
 const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const localData = localStorage.getItem("todos");
+    return localData ? JSON.parse(localData) : [];
+  });
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -27,6 +30,10 @@ const TodoList: React.FC = () => {
   const filteredTodos = todos.filter((todo) =>
     todo.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = () => {
     if (inputValue.trim()) {
