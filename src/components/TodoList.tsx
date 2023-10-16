@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
+  Chip,
 } from "@material-tailwind/react";
 
 import TodoItem from "./TodoItem";
@@ -29,19 +30,34 @@ const TodoList: React.FC = () => {
       <CardHeader
         shadow={true}
         floated={true}
-        className="min-h-[50px] p-2 rounded-md flex justify-between flex-wrap gap-2"
+        className="min-h-[50px] p-2 rounded-md flex flex-col sm:flex-row sm:justify-between gap-2"
       >
-        <SearchTodo todoData={todoData} setFilteredTodoData={setFilteredTodoData} />
+        <SearchTodo
+          todoData={todoData}
+          setFilteredTodoData={setFilteredTodoData}
+        />
         <AddTodo setTodoData={setTodoData} />
       </CardHeader>
-      <CardBody>
-        <div className="p-4">
-          {filteredTodoData.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} setTodoData={setTodoData} />
-          ))}
-        </div>
+      <CardBody className="flex flex-col gap-2">
+        {filteredTodoData.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} setTodoData={setTodoData} />
+        ))}
       </CardBody>
-      <CardFooter className="pt-0"><div></div></CardFooter>
+      <CardFooter className="pt-2 flex flex-wrap gap-2 items-center">
+        <Chip value={`Total: ${filteredTodoData.length}`} />
+        <Chip 
+        color="green"
+          value={`Completed: ${
+            filteredTodoData.filter((todo) => todo.done).length
+          }`}
+        />
+        <Chip
+          color="red"
+          value={`Uncompleted: ${
+            filteredTodoData.filter((todo) => !todo.done).length
+          }`}
+        />
+      </CardFooter>
     </Card>
   );
 };

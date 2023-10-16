@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-tailwind/react";
-
+import { ToastContainer } from 'react-toastify';
+  
+import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
 
 const root = ReactDOM.createRoot(
@@ -12,6 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
+      <ToastContainer/>
       <App />
     </ThemeProvider>
   </React.StrictMode>

@@ -47,9 +47,9 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData }) => {
       placement="bottom-end"
     >
       <PopoverHandler>
-        <Button variant="text" className="flex items-center gap-2">
+        <Button className="flex items-center justify-center gap-2">
           <PlusIcon className="h-4 w-4" />
-          New
+          Create New
         </Button>
       </PopoverHandler>
       <PopoverContent className="flex flex-col gap-3">
