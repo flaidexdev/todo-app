@@ -21,24 +21,24 @@ const TodoList: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Work");
   const categories = ["Work", "Home", "Personal"];
 
   const filteredTodos = todos.filter((todo) =>
-    todo.title.toLowerCase().includes(searchTerm.toLowerCase())
+    todo.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const addTodo = () => {
     if (inputValue.trim()) {
       const newTodo: Todo = {
         id: Date.now(),
-        title: inputValue,
+        content: inputValue,
         category: category,
         done: false,
       };
       setTodos([...todos, newTodo]);
       setInputValue("");
-      setCategory("");
+      setCategory("Work");
       setOpen(false)
     }
   };
