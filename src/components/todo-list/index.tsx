@@ -18,11 +18,15 @@ import { Todo } from "../../types";
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [category, setCategory] = useState("");
   const categories = ["Work", "Home", "Personal"];
 
-
+  const filteredTodos = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const addTodo = () => {
     if (inputValue.trim()) {
@@ -35,10 +39,11 @@ const TodoList: React.FC = () => {
       setTodos([...todos, newTodo]);
       setInputValue("");
       setCategory("");
-
+      setOpen(false)
     }
   };
 
+ 
 
   return (
     <Card className="w-full lg:w-1/2 mx-auto rounded-md text-white">
@@ -47,7 +52,13 @@ const TodoList: React.FC = () => {
         floated={true}
         className=" min-h-[50px] p-2 rounded-md flex justify-between flex-wrap gap-2"
       >
-        
+        <input
+            type="text"
+            placeholder="Search todos..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="p-2 border rounded"
+          />
         <Popover placement="bottom-end">
           <PopoverHandler>
             <Button>New</Button>
@@ -76,7 +87,7 @@ const TodoList: React.FC = () => {
       <CardBody>
         <div className="p-4">
          
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}
