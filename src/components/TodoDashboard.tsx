@@ -47,14 +47,15 @@ const TodoDashboard: React.FC = () => {
   }, [status, category, todoData, setFilteredTodoData]);
 
   return (
-    <div className="grid grid-cols-12 gap-4">
+    <div data-testid="todo-dashboard" className="grid grid-cols-12 gap-4">
       {menu && (
         <div
+          data-testid="menu-overlay"
           onClick={() => setMenu(false)}
           className="z-[100] fixed top-0 left-0 w-full h-full bg-dark/20"
         ></div>
       )}
-      <div className="col-span-12 md:col-span-3">
+      <div className="col-span-12 md:col-span-4 lg:col-span-3">
         <Sidebar
           status={status}
           setStatus={setStatus}
@@ -69,7 +70,7 @@ const TodoDashboard: React.FC = () => {
           setCategory={setCategory}
         />
       </div>
-      <div className="col-span-12 md:col-span-9">
+      <div className="col-span-12 md:col-span-8 lg:col-span-9">
         <TodoList
           setMenu={setMenu}
           categories={categories}

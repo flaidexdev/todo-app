@@ -42,7 +42,7 @@ const StatusBar: FC<StatusBarProps> = ({
         <Typography>Status</Typography>
       </div>
 
-      <div className="flex flex-col gap-2 divide-t">
+      <div className="flex flex-col gap-4">
         <StatusCard
           data={"Total"}
           todoData={todoData}

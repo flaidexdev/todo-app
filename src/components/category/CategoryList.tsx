@@ -42,6 +42,7 @@ const CategoryList: FC<CategoryListProps> = ({
         />
         {categories.map((cat) => (
           <CategoryCard
+            key={cat}
             data={cat}
             setCategories={setCategories}
             todoData={todoData}

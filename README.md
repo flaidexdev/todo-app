@@ -6,6 +6,7 @@ A awesome and responsive Todo application built with React.js, TypeScript, and s
 
 - 📝 Add and manage Todo list items
 - 🔍 Search functionality for filtering Todo list items
+- 🔍 Status filtering Todo list items based on complete and incomplete
 - 📋 Copy Todo list item contents to the clipboard directly from the UI
 - 💾 Persistent storage of Todo list items and categories using LocalStorage
 - 📱 Fully responsive design for mobile and desktop viewing

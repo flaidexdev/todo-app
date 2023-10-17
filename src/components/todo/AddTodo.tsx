@@ -43,12 +43,8 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData, categories }) => {
       setOpen(false);
       toast("Todo Added Successfully!");
     } else {
-      if (inputValue.trim() === "" && category === "") {
-        toast.error("Todo Content & Category Field Can't be Empty!");
-      } else if (inputValue.trim() === "") {
+      if (inputValue.trim() === "") {
         toast.error("Todo Content Field Can't be Empty!");
-      } else if (category === "") {
-        toast.error("Todo Category Field Can't be Empty!");
       }
     }
   };
@@ -65,7 +61,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData, categories }) => {
         Create New
       </Button>
 
-      <Dialog size='sm' open={open} handler={handleOpen}>
+      <Dialog size="sm" open={open} handler={handleOpen}>
         <DialogHeader>Create a new Todo.</DialogHeader>
         <DialogBody className="flex flex-col gap-3" divider>
           <Select
@@ -76,7 +72,12 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData, categories }) => {
             className="uppercase text-xs"
           >
             {categories.map((cat) => (
-              <Option className="uppercase text-xs" data-testid={cat} key={cat} value={cat}>
+              <Option
+                className="uppercase text-xs"
+                data-testid={cat}
+                key={cat}
+                value={cat}
+              >
                 {cat}
               </Option>
             ))}

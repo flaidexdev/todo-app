@@ -92,7 +92,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
             >
               <PopoverHandler>
                 <div className="w-fit">
-                  <TrashIcon className="h-4 w-4 hover:text-red-500" />
+                  <TrashIcon data-testid="trash-icon" className="h-4 w-4 hover:text-red-500" />
                 </div>
               </PopoverHandler>
               <PopoverContent className="z-[100] max-w-[12rem]">
