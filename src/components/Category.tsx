@@ -89,9 +89,7 @@ const CategoryList: FC<CategoryListProps> = ({
   useEffect(() => {
     if (category !== "" && category !== "All") {
       setFilteredTodoData((prevFilteredTodoData) =>
-        todoData.filter((todo) =>
-          todo.category.toLowerCase().includes(category.toLowerCase())
-        )
+        todoData.filter((todo) => todo.category.toLowerCase() === category.toLowerCase())
       );
     } else {
       setFilteredTodoData(() => todoData);
@@ -134,7 +132,7 @@ const CategoryList: FC<CategoryListProps> = ({
             } `}
             onClick={() => setCategory("All")}
           >
-            <div className="text-sm">All Category</div>
+            <div className="text-xs">All Category</div>
           </div>
           {categories.map((cat) => (
             <div
@@ -146,7 +144,7 @@ const CategoryList: FC<CategoryListProps> = ({
               onClick={() => setCategory(cat)}
               key={cat}
             >
-              <div className="text-sm">{cat}</div>
+              <div className="text-xs">{cat}</div>
 
               <Popover
                 open={warnPopover === cat}

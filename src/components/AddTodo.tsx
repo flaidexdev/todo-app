@@ -76,7 +76,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData, categories }) => {
           >
             {categories.map((cat) => (
               <Option data-testid={cat} key={cat} value={cat}>
-                {cat}
+                <span className="uppercase text-xs">{cat}</span>
               </Option>
             ))}
           </Select>
