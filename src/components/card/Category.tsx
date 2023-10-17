@@ -72,6 +72,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
       color={category === data ? "green" : "gray"}
     >
       <div
+      data-testid={`category-selector-${data}`}
         className={`w-full grid grid-cols-12 gap-2 items-center rounded cursor-pointer uppercase px-3 py-2 ${
           category === data
             ? "bg-green-500 text-white"

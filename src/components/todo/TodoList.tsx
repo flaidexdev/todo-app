@@ -8,7 +8,10 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
-import { ExclamationCircleIcon, Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
+import {
+  ExclamationCircleIcon,
+  Bars3CenterLeftIcon,
+} from "@heroicons/react/24/outline";
 
 import TodoCard from "../card/Todo";
 import AddTodo from "./AddTodo";
@@ -42,21 +45,32 @@ const TodoList: React.FC<TodoListProps> = ({
         floated={true}
         className="min-h-[50px] p-2 rounded-md flex flex-col sm:flex-row sm:justify-between gap-2"
       >
-        <div className="flex gap-2 items-center">
-          <IconButton className="block md:hidden" size="sm" onClick={() => setMenu(true)}>
+        {" "}
+        <SearchTodo
+          todoData={todoData}
+          setFilteredTodoData={setFilteredTodoData}
+        />
+        <div className="flex gap-2 flex-wrap items-center justify-center">
+          <IconButton
+            className="block md:hidden"
+            size="sm"
+            onClick={() => setMenu(true)}
+          >
             <Bars3CenterLeftIcon className="h-4 w-4" />
           </IconButton>
-          <SearchTodo
-            todoData={todoData}
-            setFilteredTodoData={setFilteredTodoData}
-          />
+
+          <AddTodo setTodoData={setTodoData} categories={categories} />
         </div>
-        <AddTodo setTodoData={setTodoData} categories={categories} />
       </CardHeader>
       <CardBody className="flex flex-col gap-4">
         {filteredTodoData.length > 0 ? (
           filteredTodoData.map((todo) => (
-            <TodoCard key={todo.id} todo={todo} todoData={todoData} setTodoData={setTodoData} />
+            <TodoCard
+              key={todo.id}
+              todo={todo}
+              todoData={todoData}
+              setTodoData={setTodoData}
+            />
           ))
         ) : (
           <Alert

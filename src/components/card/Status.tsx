@@ -30,6 +30,7 @@ const StatusCard: FC<StatusCardProps> = ({
       color={status === data ? "green" : "gray"}
     >
       <div
+        data-testid={`status-${data.toLowerCase()}`}
         className={`w-full flex gap-2 items-center rounded cursor-pointer uppercase px-3 py-2 ${
           status === data
             ? "bg-green-500 text-white"

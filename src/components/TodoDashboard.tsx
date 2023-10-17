@@ -30,15 +30,21 @@ const TodoDashboard: React.FC = () => {
   }, [todoData, categories]);
 
   useEffect(() => {
-    if (category !== "" && category !== "All") {
+    if (category !== "") {
       setFilteredTodoData((prevFilteredTodoData) =>
         todoData.filter((todo) => {
           return status === "Total"
-            ? todo.category.toLowerCase() === category.toLowerCase()
+            ? category === "All"
+              ? setFilteredTodoData(() => todoData)
+              : todo.category.toLowerCase() === category.toLowerCase()
+            : category === "All"
+            ? status === "Completed"
+              ? todo.done
+              : status === "Uncompleted" && !todo.done
             : (status === "Completed"
                 ? todo.done
                 : status === "Uncompleted" && !todo.done) &&
-                todo.category.toLowerCase() === category.toLowerCase();
+              todo.category.toLowerCase() === category.toLowerCase();
         })
       );
     } else {
@@ -65,7 +71,6 @@ const TodoDashboard: React.FC = () => {
           setCategories={setCategories}
           todoData={todoData}
           setTodoData={setTodoData}
-          setFilteredTodoData={setFilteredTodoData}
           category={category}
           setCategory={setCategory}
         />

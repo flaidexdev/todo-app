@@ -1,4 +1,3 @@
-import {  useEffect } from "react";
 import type { FC } from "react";
 
 import { Typography } from "@material-tailwind/react";
@@ -11,30 +10,15 @@ interface StatusBarProps {
   status: string;
   setStatus: React.Dispatch<React.SetStateAction<string>>;
   todoData: Todo[];
-  setFilteredTodoData: (
-    todoData: (prevFilteredTodoData: Todo[]) => Todo[]
-  ) => void;
 }
 
 const StatusBar: FC<StatusBarProps> = ({
   status,
   setStatus,
   todoData,
-  setFilteredTodoData,
 }) => {
   const allStatus = ["Completed", "Uncompleted"];
 
-  useEffect(() => {
-    if (status !== "" && status !== "Total") {
-      setFilteredTodoData((prevFilteredTodoData) =>
-        prevFilteredTodoData.filter((todo) =>
-          status === "Completed" ? todo.done : !todo.done
-        )
-      );
-    } else {
-      setFilteredTodoData(() => todoData);
-    }
-  }, [status, todoData, setFilteredTodoData]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -51,6 +35,7 @@ const StatusBar: FC<StatusBarProps> = ({
         />
         {allStatus.map((stat) => (
           <StatusCard
+            key={stat}
             data={stat}
             todoData={todoData}
             status={status}

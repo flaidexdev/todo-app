@@ -27,9 +27,6 @@ interface SidebarProps {
   setCategories: (category: (prevCategories: Category[]) => Category[]) => void;
   todoData: Todo[];
   setTodoData: React.Dispatch<React.SetStateAction<Todo[]>>;
-  setFilteredTodoData: (
-    todoData: (prevFilteredTodoData: Todo[]) => Todo[]
-  ) => void;
 }
 
 const Sidebar: FC<SidebarProps> = ({
@@ -43,7 +40,6 @@ const Sidebar: FC<SidebarProps> = ({
   setCategory,
   todoData,
   setTodoData,
-  setFilteredTodoData,
 }) => {
   return (
     <>
@@ -53,7 +49,6 @@ const Sidebar: FC<SidebarProps> = ({
             setStatus={setStatus}
             status={status}
             todoData={todoData}
-            setFilteredTodoData={setFilteredTodoData}
           />
           <CategoryList
             category={category}
@@ -91,7 +86,6 @@ const Sidebar: FC<SidebarProps> = ({
               setStatus={setStatus}
               status={status}
               todoData={todoData}
-              setFilteredTodoData={setFilteredTodoData}
             />
           </div>
           <div className="max-h-[382px] overflow-y-auto p-2">

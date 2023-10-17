@@ -31,7 +31,7 @@ const SearchTodo: React.FC<SearchTodoProps> = ({
   }, [searchTerm, todoData, setFilteredTodoData]);
 
   return (
-    <div className="relative w-full flex items-center justify-center">
+    <div className="relative flex items-center justify-center">
       <Input
         size="md"
         data-testid="categoryInput"
