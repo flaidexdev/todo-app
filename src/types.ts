@@ -4,3 +4,5 @@ export interface Todo {
   category: string;
   done: boolean;
 }
+
+export type Category = string;

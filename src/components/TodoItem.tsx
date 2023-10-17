@@ -13,6 +13,45 @@ interface TodoItemProps {
   setTodoData: (todoData: (prevTodoData: Todo[]) => Todo[]) => void;
 }
 
+type Color =
+  | "blue"
+  | "red"
+  | "green"
+  | "amber"
+  | "pink"
+  | "indigo"
+  | "purple"
+  | "teal"
+  | "cyan";
+
+const colors: Color[] = [
+  "blue",
+  "red",
+  "green",
+  "amber",
+  "pink",
+  "indigo",
+  "purple",
+  "teal",
+  "cyan",
+];
+
+const getHashedValue = (input: string): number => {
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+    const char = input.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return hash;
+};
+
+const getColorForCategory = (category: string): Color => {
+  const hashValue = getHashedValue(category);
+  const index = Math.abs(hashValue) % colors.length;
+  return colors[index];
+};
+
 const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(todo.content);
@@ -26,9 +65,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
       )
     );
     if (todo.done) {
-      toast("Task Uncompleted Successfully!");
+      toast("Todo Uncompleted Successfully!");
     } else {
-      toast("Task Completed Successfully!");
+      toast("Todo Completed Successfully!");
     }
   };
 
@@ -36,7 +75,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
     setTodoData((prevTodoData) =>
       prevTodoData.filter((todo) => todo.id !== id)
     );
-    toast("Task Removed Successfully!");
+    toast("Todo Removed Successfully!");
   };
 
   return (
@@ -51,13 +90,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
           <div className="col-span-12 md:col-span-4">
             <div className="flex items-center justify-end flex-wrap gap-2 ">
               <Chip
-                color={`${
-                  todo.category === "Work"
-                    ? "amber"
-                    : todo.category === "Personal"
-                    ? "teal"
-                    : "purple"
-                }`}
+                color={getColorForCategory(todo.category)}
                 size="sm"
                 value={todo.category}
               />
