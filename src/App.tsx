@@ -1,6 +1,6 @@
 import React from "react";
 
-import TodoList from "./components/TodoList";
+import TodoDashboard from "./components/TodoDashboard";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <h1 className="text-xl font-bold">Todo App</h1>
       </header>
       <div className="container mt-[120px] md:mt-[150px]">
-        <TodoList />
+        <TodoDashboard />
       </div>
     </div>
   );

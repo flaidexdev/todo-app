@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-import { Todo } from "../types";
+import { Todo } from "../../types";
+import { Input } from "@material-tailwind/react";
 
 interface SearchTodoProps {
   todoData: Todo[];
@@ -30,15 +31,17 @@ const SearchTodo: React.FC<SearchTodoProps> = ({
   }, [searchTerm, todoData, setFilteredTodoData]);
 
   return (
-    <div className="relative flex items-center justify-center">
-      <input
-        value={searchTerm}
+    <div className="relative w-full flex items-center justify-center">
+      <Input
+        size="md"
+        data-testid="categoryInput"
         onChange={(e) => setSearchTerm(e.target.value)}
+        value={searchTerm}
+        label="Search Todo"
         type="search"
-        placeholder="Search Todo..."
-        className="flex h-9 w-full rounded-md border border-input bg-transparent pl-6 pr-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dark disabled:cursor-not-allowed disabled:opacity-50"
+        crossOrigin="anonymous"
+        icon={<MagnifyingGlassIcon className="h-4 w-4" />}
       />
-      <MagnifyingGlassIcon className="h-4 w-4 absolute left-1 top-[10px]" />
     </div>
   );
 };

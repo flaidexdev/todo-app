@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 
 // This is a mock for the TodoList component, so we can test the App component in isolation.
 jest.mock('./components/TodoList', () => {

@@ -15,7 +15,7 @@ import {
 
 import { PlusIcon } from "@heroicons/react/24/outline";
 
-import { Todo, Category } from "../types";
+import { Todo, Category } from "../../types";
 
 interface AddTodoProps {
   setTodoData: (todoData: (prevTodoData: Todo[]) => Todo[]) => void;
@@ -65,7 +65,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData, categories }) => {
         Create New
       </Button>
 
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog size='sm' open={open} handler={handleOpen}>
         <DialogHeader>Create a new Todo.</DialogHeader>
         <DialogBody className="flex flex-col gap-3" divider>
           <Select
@@ -73,10 +73,11 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodoData, categories }) => {
             value={category}
             onChange={(value: any) => setCategory(value)}
             label="Select Category"
+            className="uppercase text-xs"
           >
             {categories.map((cat) => (
-              <Option data-testid={cat} key={cat} value={cat}>
-                <span className="uppercase text-xs">{cat}</span>
+              <Option className="uppercase text-xs" data-testid={cat} key={cat} value={cat}>
+                {cat}
               </Option>
             ))}
           </Select>

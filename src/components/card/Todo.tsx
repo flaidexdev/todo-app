@@ -1,4 +1,4 @@
-import { Todo } from "../types";
+import { Todo, Color } from "../../types";
 
 import { Card, CardBody, Chip, Tooltip } from "@material-tailwind/react";
 import { toast } from "react-toastify";
@@ -8,32 +8,32 @@ import {
   ArrowPathRoundedSquareIcon,
 } from "@heroicons/react/24/outline";
 
-interface TodoItemProps {
+interface TodoCardProps {
   todo: Todo;
+  todoData: Todo[];
   setTodoData: (todoData: (prevTodoData: Todo[]) => Todo[]) => void;
 }
 
-type Color =
-  | "blue"
-  | "red"
-  | "green"
-  | "amber"
-  | "pink"
-  | "indigo"
-  | "purple"
-  | "teal"
-  | "cyan";
-
 const colors: Color[] = [
-  "blue",
-  "red",
-  "green",
+  "blue-gray",
+  "gray",
+  "brown",
+  "deep-orange",
+  "orange",
   "amber",
-  "pink",
-  "indigo",
-  "purple",
+  "yellow",
+  "lime",
+  "light-green",
+  "green",
   "teal",
   "cyan",
+  "light-blue",
+  "blue",
+  "indigo",
+  "deep-purple",
+  "purple",
+  "pink",
+  "red",
 ];
 
 const getHashedValue = (input: string): number => {
@@ -52,23 +52,35 @@ const getColorForCategory = (category: string): Color => {
   return colors[index];
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
+const TodoCard: React.FC<TodoCardProps> = ({ todo, todoData, setTodoData }) => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(todo.content);
     toast("Copied To Clipboard Successfully!");
   };
 
   const toggleDone = (id: number) => {
-    setTodoData((prevTodoData) =>
-      prevTodoData.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
-    );
-    if (todo.done) {
-      toast("Todo Uncompleted Successfully!");
-    } else {
-      toast("Todo Completed Successfully!");
+    let toastMessage = "";
+
+    const updatedTodoData = todoData.map((todo) => {
+      if (todo.id === id) {
+        const newDoneStatus = !todo.done;
+
+        // Determine the toast message based on the toggled status
+        toastMessage = newDoneStatus
+          ? "Todo Completed Successfully!"
+          : "Todo Uncompleted Successfully!";
+
+        return { ...todo, done: newDoneStatus };
+      }
+      return todo;
+    });
+
+    // Update the state only if it has changed to prevent unnecessary re-renders
+    if (JSON.stringify(updatedTodoData) !== JSON.stringify(todoData)) {
+      setTodoData((prevTodoData) => updatedTodoData);
     }
+
+    toast(toastMessage);
   };
 
   const removeTodo = (id: number) => {
@@ -125,4 +137,4 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodoData }) => {
   );
 };
 
-export default TodoItem;
+export default TodoCard;

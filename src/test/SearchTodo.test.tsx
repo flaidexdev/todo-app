@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import SearchTodo from "./SearchTodo";
+import SearchTodo from "../components/todo/SearchTodo";
 import { Todo } from "../types";
 
 describe("<SearchTodo />", () => {
