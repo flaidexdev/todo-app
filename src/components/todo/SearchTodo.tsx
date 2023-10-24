@@ -21,7 +21,7 @@ const SearchTodo: React.FC<SearchTodoProps> = ({
   useEffect(() => {
     if (searchTerm !== "") {
       setFilteredTodoData((prevFilteredTodoData) =>
-        prevFilteredTodoData.filter((todo) =>
+        todoData.filter((todo) =>
           todo.content.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
