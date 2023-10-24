@@ -35,7 +35,7 @@ const TodoDashboard: React.FC = () => {
         todoData.filter((todo) => {
           return status === "Total"
             ? category === "All"
-              ? setFilteredTodoData(() => todoData)
+              ? todoData
               : todo.category.toLowerCase() === category.toLowerCase()
             : category === "All"
             ? status === "Completed"
